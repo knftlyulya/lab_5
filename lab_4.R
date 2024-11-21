@@ -8,11 +8,11 @@ library(tseries)
 
 
 # Завдання 1
-plot(wmurders)
+autoplot(wmurders)
 frequency(wmurders)
 
 adf.test(wmurders)  # Тест Дікі-Фуллера на стаціонарність
-
+lambda <- BoxCox.lambda(wmurders)
 # Приведення ряду до стаціонарного вигляду
 wmurders_diff <- diff(wmurders)
 adf.test(wmurders_diff) # ряд стаціонарний, тому d = 1
@@ -26,7 +26,7 @@ checkresiduals(model_wmurders)  # Перевірка залишків на но�
 fc_wmurders <- forecast(model_wmurders, h = 3)
 print(fc_wmurders)
 
-plot(fc_wmurders)
+autoplot(fc_wmurders)
 
 auto_wmurders <- auto.arima(wmurders)
 checkresiduals(auto_wmurders)
